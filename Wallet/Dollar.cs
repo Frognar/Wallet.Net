@@ -1,62 +1,37 @@
 ﻿namespace Wallet;
 
-public abstract class Money
-{
-  protected int amount;
+public class Money {
+  readonly int amount;
+  readonly string currency;
 
-  public override bool Equals(object obj)
-  {
+  public Money(int amount, string currency) {
+    this.amount = amount;
+    this.currency = currency;
+  }
+
+  public static Money Dollar(int amount) {
+    return new Money(amount, "USD");
+  }
+
+  public static Money Franc(int amount) {
+    return new Money(amount, "CHF");
+  }
+
+  public Money Times(int multiplier) {
+    return new Money(amount * multiplier, currency);
+  }
+
+  public string Currency() {
+    return currency;
+  }
+
+  public override bool Equals(object obj) {
     Money money = (Money)obj;
     return amount == money.amount
-      && GetType().Equals(money.GetType());
+      && currency.Equals(money.currency);
   }
 
-  public static Money Dollar(int amount)
-  {
-    return new Dollar(amount);
-  }
-
-  public static Money Franc(int amount)
-  {
-    return new Franc(amount);
-  }
-
-  public abstract Money Times(int amount);
-  public abstract string Currency();
-}
-
-public class Dollar : Money
-{
-  public Dollar(int amount)
-  {
-    this.amount = amount;
-  }
-
-  public override string Currency()
-  {
-    return "USD";
-  }
-
-  public override Money Times(int multiplier)
-  {
-    return new Dollar(amount * multiplier);
-  }
-}
-
-public class Franc : Money
-{
-  public Franc(int amount)
-  {
-    this.amount = amount;
-  }
-
-  public override string Currency()
-  {
-    return "CHF";
-  }
-
-  public override Money Times(int multiplier)
-  {
-    return new Franc(amount * multiplier);
+  public override int GetHashCode() {
+    throw new System.NotImplementedException();
   }
 }
