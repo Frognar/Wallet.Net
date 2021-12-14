@@ -1,8 +1,8 @@
 ﻿namespace Wallet;
 
 public class Sum : Expression {
-  public readonly Expression augend;
-  public readonly Expression addend;
+  readonly Expression augend;
+  readonly Expression addend;
 
   public Sum(Expression augend, Expression addend) {
     this.augend = augend;
@@ -10,12 +10,16 @@ public class Sum : Expression {
   }
 
   public Expression Plus(Expression addend) {
-    return null;
+    return new Sum(this, addend);
+  }
+
+  public Expression Times(int multiplier) {
+    return new Sum(augend.Times(multiplier), addend.Times(multiplier));
   }
 
   public Money Reduce(Bank bank, string to) {
-    int amount = augend.Reduce(bank, to).amount
-               + addend.Reduce(bank, to).amount;
+    int amount = augend.Reduce(bank, to).Amount
+               + addend.Reduce(bank, to).Amount;
     return new Money(amount, to);
   }
 }

@@ -1,8 +1,11 @@
 ﻿namespace Wallet;
 
 public class Money : Expression {
-  public readonly int amount;
+  readonly int amount;
   readonly string currency;
+  
+  public int Amount => amount;
+  public string Currency => currency;
 
   public Money(int amount, string currency) {
     this.amount = amount;
@@ -30,17 +33,13 @@ public class Money : Expression {
     return new Money(amount / rate, to);
   }
 
-  public string Currency() {
-    return currency;
-  }
-
   public override bool Equals(object obj) {
     Money money = (Money)obj;
     return amount == money.amount
-      && currency.Equals(money.currency);
+        && currency.Equals(money.currency);
   }
 
   public override int GetHashCode() {
-    throw new System.NotImplementedException();
+    return 0;
   }
 }

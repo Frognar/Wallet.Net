@@ -19,8 +19,8 @@ public class WalletTests {
 
   [Fact]
   public void TestCurrency() {
-    Assert.Equal("USD", Money.Dollar(1).Currency());
-    Assert.Equal("CHF", Money.Franc(1).Currency());
+    Assert.Equal("USD", Money.Dollar(1).Currency);
+    Assert.Equal("CHF", Money.Franc(1).Currency);
   }
 
   [Fact]
@@ -28,7 +28,7 @@ public class WalletTests {
     Money five = Money.Dollar(5);
     Expression result = five.Plus(five);
     Sum sum = (Sum)result;
-    Bank bank = new Bank();
+    Bank bank = new();
     Money reduced = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(10), reduced);
   }
@@ -36,21 +36,21 @@ public class WalletTests {
   [Fact]
   public void TestReduceSum() {
     Expression sum = new Sum(Money.Dollar(3), Money.Dollar(4));
-    Bank bank = new Bank();
+    Bank bank = new();
     Money result = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(7), result);
   }
 
   [Fact]
   public void TestReduceMoney() {
-    Bank bank = new Bank();
+    Bank bank = new();
     Money result = bank.Reduce(Money.Dollar(1), "USD");
     Assert.Equal(Money.Dollar(1), result);
   }
 
   [Fact]
   public void TestReduceMoneyDifferentCurrency() {
-    Bank bank = new Bank();
+    Bank bank = new();
     bank.AddRate("CHF", "USD", 2);
     Money result = bank.Reduce(Money.Franc(2), "USD");
     Assert.Equal(Money.Dollar(1), result);
@@ -65,9 +65,31 @@ public class WalletTests {
   public void TestMixedAddition() {
     Expression fiveBucks = Money.Dollar(5);
     Expression tenFrancs = Money.Franc(10);
-    Bank bank = new Bank();
+    Bank bank = new();
     bank.AddRate("CHF", "USD", 2);
     Expression result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(10), result);
+  }
+
+  [Fact]
+  public void TestSumPlusMoney() {
+    Expression fiveBucks = Money.Dollar(5);
+    Expression tenFrancs = Money.Franc(10);
+    Bank bank = new();
+    bank.AddRate("CHF", "USD", 2);
+    Expression sum = new Sum(fiveBucks, tenFrancs).Plus(fiveBucks);
+    Money result = bank.Reduce(sum, "USD");
+    Assert.Equal(Money.Dollar(15), result);
+  }
+
+  [Fact]
+  public void TestSumTimes() {
+    Expression fiveBucks = Money.Dollar(5);
+    Expression tenFrancs = Money.Franc(10);
+    Bank bank = new();
+    bank.AddRate("CHF", "USD", 2);
+    Expression sum = new Sum(fiveBucks, tenFrancs).Times(2);
+    Money result = bank.Reduce(sum, "USD");
+    Assert.Equal(Money.Dollar(20), result);
   }
 }
