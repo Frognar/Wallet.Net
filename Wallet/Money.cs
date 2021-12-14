@@ -17,11 +17,11 @@ public class Money : Expression {
     return new Money(amount, "CHF");
   }
 
-  public Money Times(int multiplier) {
+  public Expression Times(int multiplier) {
     return new Money(amount * multiplier, currency);
   }
 
-  public Expression Plus(Money addend) {
+  public Expression Plus(Expression addend) {
     return new Sum(this, addend);
   }
 
