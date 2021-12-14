@@ -1,7 +1,7 @@
 ﻿namespace Wallet;
 
 public class Money : Expression {
-  readonly int amount;
+  public readonly int amount;
   readonly string currency;
 
   public Money(int amount, string currency) {
@@ -22,7 +22,11 @@ public class Money : Expression {
   }
 
   public Expression Plus(Money addend) {
-    return new Money(amount + addend.amount, currency);
+    return new Sum(this, addend);
+  }
+
+  public Money Reduce(string to) {
+    return this;
   }
 
   public string Currency() {
