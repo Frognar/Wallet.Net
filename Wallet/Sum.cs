@@ -1,16 +1,16 @@
-﻿namespace Wallet {
-  public class Sum : Expression {
-    public readonly Money augend;
-    public readonly Money addend;
+﻿namespace Wallet;
 
-    public Sum(Money augend, Money addend) {
-      this.augend = augend;
-      this.addend = addend;
-    }
+public class Sum : Expression {
+  public readonly Money augend;
+  public readonly Money addend;
 
-    public Money Reduce(string to) {
-      int amount = augend.amount + addend.amount;
-      return new Money(amount, to);
-    }
+  public Sum(Money augend, Money addend) {
+    this.augend = augend;
+    this.addend = addend;
+  }
+
+  public Money Reduce(Bank bank, string to) {
+    int amount = augend.amount + addend.amount;
+    return new Money(amount, to);
   }
 }
