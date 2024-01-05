@@ -1,6 +1,6 @@
 ﻿namespace Wallet;
 
-public class Money : Expression {
+public record Money : Expression {
   readonly decimal amount;
   readonly string currency;
   
@@ -31,15 +31,5 @@ public class Money : Expression {
   public Money Reduce(Bank bank, string to) {
     int rate = bank.Rate(currency, to);
     return new Money(amount / rate, to);
-  }
-
-  public override bool Equals(object obj) {
-    Money money = (Money)obj;
-    return amount == money.amount
-        && currency.Equals(money.currency);
-  }
-
-  public override int GetHashCode() {
-    return 0;
   }
 }
