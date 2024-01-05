@@ -96,5 +96,6 @@ public class WalletTests {
   [Fact]
   public void TestCreateMoneyWithDecimal() {
     Money money = new(1.23m, "PLN");
+    Assert.Equal(1.23m, money.Amount);
   }
 }

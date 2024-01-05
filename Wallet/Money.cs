@@ -4,7 +4,7 @@ public class Money : Expression {
   readonly decimal amount;
   readonly string currency;
   
-  public int Amount => (int)amount;
+  public decimal Amount => amount;
   public string Currency => currency;
 
   public Money(int amount, string currency) : this((decimal)amount, currency) {
