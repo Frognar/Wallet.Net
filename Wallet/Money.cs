@@ -1,10 +1,10 @@
 ﻿namespace Wallet;
 
 public class Money : Expression {
-  readonly int amount;
+  readonly decimal amount;
   readonly string currency;
   
-  public int Amount => amount;
+  public int Amount => (int)amount;
   public string Currency => currency;
 
   public Money(int amount, string currency) {
@@ -13,7 +13,7 @@ public class Money : Expression {
   }
   
   public Money(decimal amount, string currency) {
-    this.amount = (int)amount;
+    this.amount = amount;
     this.currency = currency;
   }
 
