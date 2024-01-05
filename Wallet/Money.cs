@@ -1,17 +1,6 @@
 ﻿namespace Wallet;
 
-public record Money : Expression {
-  readonly decimal amount;
-  readonly string currency;
-  
-  public decimal Amount => amount;
-  public string Currency => currency;
-
-  public Money(decimal amount, string currency) {
-    this.amount = amount;
-    this.currency = currency;
-  }
-
+public record Money(decimal Amount, string Currency) : Expression {
   public static Money Dollar(decimal amount) {
     return new Money(amount, "USD");
   }
