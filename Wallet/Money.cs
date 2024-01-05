@@ -11,6 +11,11 @@ public class Money : Expression {
     this.amount = amount;
     this.currency = currency;
   }
+  
+  public Money(decimal amount, string currency) {
+    this.amount = (int)amount;
+    this.currency = currency;
+  }
 
   public static Money Dollar(int amount) {
     return new Money(amount, "USD");
