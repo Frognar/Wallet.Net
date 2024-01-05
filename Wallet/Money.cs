@@ -20,10 +20,6 @@ public class Money : Expression {
     return new Money(amount, "CHF");
   }
 
-  public Expression Times(int multiplier) {
-    return new Money(amount * multiplier, currency);
-  }
-
   public Expression Times(decimal multiplier) {
     return new Money(amount * multiplier, currency);
   }
