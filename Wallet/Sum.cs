@@ -18,7 +18,7 @@ public class Sum : Expression {
   }
 
   public Money Reduce(Bank bank, string to) {
-    int amount = augend.Reduce(bank, to).Amount
+    var amount = augend.Reduce(bank, to).Amount
                + addend.Reduce(bank, to).Amount;
     return new Money(amount, to);
   }
