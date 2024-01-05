@@ -18,7 +18,7 @@ public class Sum : Expression {
   }
 
   public Expression Times(decimal multiplier) {
-    return new Sum(augend.Times((int)multiplier), addend.Times((int)multiplier));
+    return new Sum(augend.Times(multiplier), addend.Times(multiplier));
   }
 
   public Money Reduce(Bank bank, string to) {

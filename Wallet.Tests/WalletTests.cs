@@ -96,9 +96,9 @@ public class WalletTests {
     Expression tenFrancs = Money.Franc(10);
     Bank bank = new();
     bank.AddRate("CHF", "USD", 2);
-    Expression sum = new Sum(fiveBucks, tenFrancs).Times(2);
+    Expression sum = new Sum(fiveBucks, tenFrancs).Times(2.5m);
     Money result = bank.Reduce(sum, "USD");
-    Assert.Equal(Money.Dollar(20), result);
+    Assert.Equal(Money.Dollar(25), result);
   }
   
   [Fact]
