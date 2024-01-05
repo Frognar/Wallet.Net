@@ -24,6 +24,10 @@ public class Money : Expression {
     return new Money(amount * multiplier, currency);
   }
 
+  public Expression Times(decimal multiplier) {
+    return new Money(amount * multiplier, currency);
+  }
+
   public Expression Plus(Expression addend) {
     return new Sum(this, addend);
   }

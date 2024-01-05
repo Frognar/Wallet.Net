@@ -9,6 +9,13 @@ public class WalletTests {
     Assert.Equal(Money.Dollar(10), five.Times(2));
     Assert.Equal(Money.Dollar(15), five.Times(3));
   }
+  
+  [Fact]
+  public void TestDecimalMultiplication() {
+    Money five = Money.Dollar(5);
+    Assert.Equal(Money.Dollar(10), five.Times(2m));
+    Assert.Equal(Money.Dollar(15), five.Times(3m));
+  }
 
   [Fact]
   public void TestEquality() {
