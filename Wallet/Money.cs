@@ -7,9 +7,6 @@ public class Money : Expression {
   public decimal Amount => amount;
   public string Currency => currency;
 
-  public Money(int amount, string currency) : this((decimal)amount, currency) {
-  }
-  
   public Money(decimal amount, string currency) {
     this.amount = amount;
     this.currency = currency;
