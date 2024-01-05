@@ -18,8 +18,6 @@ public class Sum : Expression {
   }
 
   public Money Reduce(Bank bank, string to) {
-    var amount = augend.Reduce(bank, to).Amount
-               + addend.Reduce(bank, to).Amount;
-    return new Money(amount, to);
+    return new Money(augend.Reduce(bank, to).Amount + addend.Reduce(bank, to).Amount, to);
   }
 }
