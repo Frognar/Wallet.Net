@@ -21,7 +21,7 @@ public record Money : Expression {
   }
 
   public Expression Times(decimal multiplier) {
-    return new Money(amount * multiplier, currency);
+    return new Money(Amount * multiplier, Currency);
   }
 
   public Expression Plus(Expression addend) {
@@ -29,7 +29,7 @@ public record Money : Expression {
   }
 
   public Money Reduce(Bank bank, string to) {
-    int rate = bank.Rate(currency, to);
-    return new Money(amount / rate, to);
+    int rate = bank.Rate(Currency, to);
+    return new Money(Amount / rate, to);
   }
 }
