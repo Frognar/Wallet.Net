@@ -1,6 +1,6 @@
 ﻿namespace Wallet;
 
-public record Money(decimal Amount, string Currency) : Expression {
+public readonly record struct Money(decimal Amount, string Currency) : Expression {
   public static Money Dollar(decimal amount) {
     return new Money(amount, "USD");
   }
