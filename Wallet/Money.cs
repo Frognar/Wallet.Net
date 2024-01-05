@@ -12,11 +12,11 @@ public class Money : Expression {
     this.currency = currency;
   }
 
-  public static Money Dollar(int amount) {
+  public static Money Dollar(decimal amount) {
     return new Money(amount, "USD");
   }
 
-  public static Money Franc(int amount) {
+  public static Money Franc(decimal amount) {
     return new Money(amount, "CHF");
   }
 

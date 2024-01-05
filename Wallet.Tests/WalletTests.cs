@@ -12,9 +12,9 @@ public class WalletTests {
 
   [Fact]
   public void TestEquality() {
-    Assert.True(Money.Dollar(5).Equals(Money.Dollar(5)));
+    Assert.True(Money.Dollar(5).Equals(Money.Dollar(5m)));
     Assert.False(Money.Dollar(5).Equals(Money.Dollar(6)));
-    Assert.False(Money.Franc(5).Equals(Money.Dollar(5)));
+    Assert.False(Money.Franc(5m).Equals(Money.Dollar(5)));
   }
 
   [Fact]
