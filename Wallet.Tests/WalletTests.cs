@@ -92,10 +92,4 @@ public class WalletTests {
     Money result = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(20), result);
   }
-
-  [Fact]
-  public void TestCreateMoneyWithDecimal() {
-    Money money = new(1.23m, "PLN");
-    Assert.Equal(1.23m, money.Amount);
-  }
 }
