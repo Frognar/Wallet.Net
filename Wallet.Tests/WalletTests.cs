@@ -5,6 +5,7 @@ namespace Wallet.Tests;
 public class WalletTests {
   readonly Money fiveBucks = Money.Dollar(5);
   readonly Money tenFrancs = Money.Franc(10);
+  readonly Bank bank = new([("CHF", "USD", 2.5m)]);
   
   [Fact]
   public void TestMultiplication() {
@@ -29,7 +30,6 @@ public class WalletTests {
   [Fact]
   public void TestSimpleAddition() {
     Expression sum = fiveBucks.Plus(fiveBucks);
-    Bank bank = new();
     Money reduced = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(10), reduced);
   }
@@ -37,21 +37,18 @@ public class WalletTests {
   [Fact]
   public void TestReduceSum() {
     Sum sum = new(Money.Dollar(3), Money.Dollar(4));
-    Bank bank = new();
     Money reduced = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(7), reduced);
   }
 
   [Fact]
   public void TestReduceMoney() {
-    Bank bank = new();
     Money reduced = bank.Reduce(Money.Dollar(1), "USD");
     Assert.Equal(Money.Dollar(1), reduced);
   }
 
   [Fact]
   public void TestReduceMoneyDifferentCurrency() {
-    Bank bank = new([("CHF", "USD", 2.5m)]);
     Money reduced = bank.Reduce(Money.Franc(2), "USD");
     Assert.Equal(Money.Dollar(.8m), reduced);
   }
@@ -63,14 +60,12 @@ public class WalletTests {
 
   [Fact]
   public void TestMixedAddition() {
-    Bank bank = new([("CHF", "USD", 2.5m)]);
     Money reduced = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(9), reduced);
   }
 
   [Fact]
   public void TestSumPlusMoney() {
-    Bank bank = new([("CHF", "USD", 2.5m)]);
     Expression sum = new Sum(fiveBucks, tenFrancs).Plus(fiveBucks);
     Money reduced = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(14), reduced);
@@ -78,7 +73,6 @@ public class WalletTests {
 
   [Fact]
   public void TestSumTimes() {
-    Bank bank = new([("CHF", "USD", 2.5m)]);
     Expression sum = new Sum(fiveBucks, tenFrancs).Times(2.5m);
     Money reduced = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(22.5m), reduced);
