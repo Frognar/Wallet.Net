@@ -6,7 +6,7 @@ namespace Wallet;
 public class Bank {
   ImmutableDictionary<Pair, decimal> Rates { get; }
 
-  private Bank(ImmutableDictionary<Pair, decimal> rates) {
+  Bank(ImmutableDictionary<Pair, decimal> rates) {
     Rates = rates;
   }
 
