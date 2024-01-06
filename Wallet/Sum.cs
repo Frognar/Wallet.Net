@@ -1,13 +1,8 @@
 ﻿namespace Wallet;
 
-public class Sum : Expression {
-  Expression Augend { get; }
-  Expression Addend { get; }
-
-  public Sum(Expression augend, Expression addend) {
-    Augend = augend;
-    Addend = addend;
-  }
+public class Sum(Expression augend, Expression addend) : Expression {
+  Expression Augend { get; } = augend;
+  Expression Addend { get; } = addend;
 
   public Expression Plus(Expression addend) {
     return new Sum(this, addend);
