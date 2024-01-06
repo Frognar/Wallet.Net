@@ -58,8 +58,7 @@ public class WalletTests {
 
   [Fact]
   public void TestReduceMoneyDifferentCurrency() {
-    Bank bank = new();
-    bank.AddRate("CHF", "USD", 2);
+    Bank bank = new([("CHF", "USD", 2m)]);
     Money result = bank.Reduce(Money.Franc(2), "USD");
     Assert.Equal(Money.Dollar(1), result);
   }
@@ -73,8 +72,7 @@ public class WalletTests {
   public void TestMixedAddition() {
     Expression fiveBucks = Money.Dollar(5);
     Expression tenFrancs = Money.Franc(10);
-    Bank bank = new();
-    bank.AddRate("CHF", "USD", 2);
+    Bank bank = new([("CHF", "USD", 2m)]);
     Expression result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(10), result);
   }
@@ -83,8 +81,7 @@ public class WalletTests {
   public void TestSumPlusMoney() {
     Expression fiveBucks = Money.Dollar(5);
     Expression tenFrancs = Money.Franc(10);
-    Bank bank = new();
-    bank.AddRate("CHF", "USD", 2);
+    Bank bank = new([("CHF", "USD", 2m)]);
     Expression sum = new Sum(fiveBucks, tenFrancs).Plus(fiveBucks);
     Money result = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(15), result);
@@ -94,8 +91,7 @@ public class WalletTests {
   public void TestSumTimes() {
     Expression fiveBucks = Money.Dollar(5);
     Expression tenFrancs = Money.Franc(10);
-    Bank bank = new();
-    bank.AddRate("CHF", "USD", 2);
+    Bank bank = new([("CHF", "USD", 2m)]);
     Expression sum = new Sum(fiveBucks, tenFrancs).Times(2.5m);
     Money result = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(25), result);
@@ -105,8 +101,7 @@ public class WalletTests {
   public void TestReduceWithDecimalExchangeRate() {
     Money fiveBucks = Money.Dollar(5);
     Money tenFrancs = Money.Franc(10);
-    Bank bank = new();
-    bank.AddRate("CHF", "USD", 2.5m);
+    Bank bank = new([("CHF", "USD", 2.5m)]);
     Money result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(9), result);
   }
