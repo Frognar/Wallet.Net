@@ -4,11 +4,10 @@ using System.Collections.Immutable;
 namespace Wallet;
 
 public class Bank {
-  readonly ImmutableDictionary<Pair, decimal> rates;
-  ImmutableDictionary<Pair, decimal> Rates => rates;
+  ImmutableDictionary<Pair, decimal> Rates { get; }
 
   private Bank(ImmutableDictionary<Pair, decimal> rates) {
-    this.rates = rates;
+    Rates = rates;
   }
 
   public Bank() : this(ImmutableDictionary<Pair, decimal>.Empty) {
