@@ -1,4 +1,4 @@
-﻿namespace Wallet;
+﻿namespace Frognar.Wallet;
 
 public interface Expression {
   Money Reduce(Bank bank, string to);

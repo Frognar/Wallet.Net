@@ -1,6 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Frognar.Wallet</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.0.1</Version>
+    <Authors>Frognar</Authors>
+    <PackageProjectUrl>https://github.com/Frognar/Wallet.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Frognar/Wallet.Net</RepositoryUrl>
     <TargetFramework>net8.0</TargetFramework>
     <LangVersion>default</LangVersion>
   </PropertyGroup>

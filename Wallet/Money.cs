@@ -1,4 +1,4 @@
-﻿namespace Wallet;
+﻿namespace Frognar.Wallet;
 
 public readonly record struct Money(decimal Amount, string Currency) : Expression {
   public static Money Dollar(decimal amount) => new(amount, "USD");

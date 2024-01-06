@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace Wallet;
+namespace Frognar.Wallet;
 
 public class Bank {
   ImmutableDictionary<Pair, decimal> Rates { get; }

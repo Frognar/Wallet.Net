@@ -1,4 +1,4 @@
-﻿namespace Wallet;
+﻿namespace Frognar.Wallet;
 
 public class Sum(Expression augend, Expression addend) : Expression {
   Expression Augend { get; } = augend;

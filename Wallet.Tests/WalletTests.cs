@@ -1,3 +1,4 @@
+using Frognar.Wallet;
 using Xunit;
 
 namespace Wallet.Tests;
