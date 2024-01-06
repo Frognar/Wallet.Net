@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace Wallet;
 
 public class Bank {
-  readonly Hashtable rates = new();
+  readonly ImmutableDictionary<Pair, decimal> rates;
 
   public Bank() {
   }
 
   public Bank(IEnumerable<(string from, string to, decimal rate)> rates) {
-    foreach ((string from, string to, decimal rate) in rates) {
-      this.rates.Add(new Pair(from, to), rate);
-    }
+    this.rates = rates.ToImmutableDictionary(
+      x => new Pair(x.from, x.to),
+      x => x.rate);
   }
 
   public Money Reduce(Expression source, string to) {
