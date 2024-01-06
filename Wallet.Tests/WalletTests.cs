@@ -100,4 +100,12 @@ public class WalletTests {
     Money result = bank.Reduce(sum, "USD");
     Assert.Equal(Money.Dollar(25), result);
   }
+
+  [Fact]
+  public void TestReduceWithDecimalExchangeRate() {
+    Money fiveBucks = Money.Dollar(5);
+    Money tenFrancs = Money.Franc(10);
+    Bank bank = new();
+    bank.AddRate("CHF", "USD", 2.5m);
+  }
 }

@@ -18,6 +18,10 @@ public class Bank {
   }
 
   public void AddRate(string from, string to, int rate) {
+    rates.Add(new Pair(from, to), (decimal)rate);
+  }
+
+  public void AddRate(string from, string to, decimal rate) {
     rates.Add(new Pair(from, to), rate);
   }
 }
