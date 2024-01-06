@@ -11,7 +11,7 @@ public class Bank {
 
   public Bank(IEnumerable<(string from, string to, decimal rate)> rates) {
     foreach ((string from, string to, decimal rate) in rates) {
-      AddRate(from, to, rate);
+      this.rates.Add(new Pair(from, to), rate);
     }
   }
 
@@ -25,13 +25,5 @@ public class Bank {
     }
     
     return (decimal)rates[new Pair(from, to)];
-  }
-
-  public void AddRate(string from, string to, int rate) {
-    rates.Add(new Pair(from, to), (decimal)rate);
-  }
-
-  public void AddRate(string from, string to, decimal rate) {
-    rates.Add(new Pair(from, to), rate);
   }
 }
