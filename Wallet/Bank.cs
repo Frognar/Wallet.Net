@@ -20,10 +20,6 @@ public class Bank {
   }
 
   public decimal Rate(string from, string to) {
-    if (from.Equals(to)) {
-      return 1;
-    }
-    
-    return (decimal)rates[new Pair(from, to)];
+    return from.Equals(to) ? 1m : rates[new Pair(from, to)];
   }
 }
