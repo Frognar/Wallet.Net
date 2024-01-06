@@ -1,3 +1,3 @@
 ﻿namespace Wallet;
 
-public readonly record struct Pair(string From, string To);
+internal readonly record struct Pair(string From, string To);
