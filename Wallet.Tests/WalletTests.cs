@@ -24,6 +24,8 @@ public class WalletTests {
   [Fact]
   public void TestCurrency() {
     Assert.Equal("USD", Money.Dollar(1).Currency);
+    Assert.Equal("EUR", Money.Euro(1).Currency);
+    Assert.Equal("PLN", Money.Zloty(1).Currency);
     Assert.Equal("CHF", Money.Franc(1).Currency);
   }
 
