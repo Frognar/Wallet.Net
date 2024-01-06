@@ -6,13 +6,17 @@ namespace Wallet;
 public class Bank {
   readonly ImmutableDictionary<Pair, decimal> rates;
 
-  public Bank() {
+  private Bank(ImmutableDictionary<Pair, decimal> rates) {
+    this.rates = rates;
   }
 
-  public Bank(IEnumerable<(string from, string to, decimal rate)> rates) {
-    this.rates = rates.ToImmutableDictionary(
-      x => new Pair(x.from, x.to),
-      x => x.rate);
+  public Bank() : this(ImmutableDictionary<Pair, decimal>.Empty) {
+  }
+
+  public Bank(IEnumerable<(string from, string to, decimal rate)> rates)
+  : this(rates.ToImmutableDictionary(
+    x => new Pair(x.from, x.to),
+    x => x.rate)) {
   }
 
   public Money Reduce(Expression source, string to) {
