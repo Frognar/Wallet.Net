@@ -1,17 +1,8 @@
 ﻿namespace Wallet;
 
 public class Sum : Expression {
-  readonly Expression augend;
-  Expression Augend {
-    get => augend;
-    init => augend = value;
-  }
-
-  readonly Expression addend;
-  Expression Addend {
-    get => addend;
-    init => addend = value;
-  }
+  Expression Augend { get; }
+  Expression Addend { get; }
 
   public Sum(Expression augend, Expression addend) {
     Augend = augend;
