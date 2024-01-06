@@ -9,12 +9,12 @@ public class Bank {
     return source.Reduce(this, to);
   }
 
-  public int Rate(string from, string to) {
+  public decimal Rate(string from, string to) {
     if (from.Equals(to)) {
       return 1;
     }
-    int rate = (int)rates[new Pair(from, to)];
-    return rate;
+    
+    return (decimal)rates[new Pair(from, to)];
   }
 
   public void AddRate(string from, string to, int rate) {

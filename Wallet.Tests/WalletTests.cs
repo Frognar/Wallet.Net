@@ -107,5 +107,7 @@ public class WalletTests {
     Money tenFrancs = Money.Franc(10);
     Bank bank = new();
     bank.AddRate("CHF", "USD", 2.5m);
+    Money result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
+    Assert.Equal(Money.Dollar(9), result);
   }
 }
