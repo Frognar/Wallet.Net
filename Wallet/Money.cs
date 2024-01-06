@@ -18,7 +18,6 @@ public readonly record struct Money(decimal Amount, string Currency) : Expressio
   }
 
   public Money Reduce(Bank bank, string to) {
-    int rate = bank.Rate(Currency, to);
-    return new Money(Amount / rate, to);
+    return new Money(Amount / bank.Rate(Currency, to), to);
   }
 }
