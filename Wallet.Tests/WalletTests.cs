@@ -110,4 +110,9 @@ public class WalletTests {
     Money result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(9), result);
   }
+
+  [Fact]
+  public void TestCreateBankWithExchangeRates() {
+    Bank bank = new Bank([("CHF", "USD", 2.5m)]);
+  }
 }

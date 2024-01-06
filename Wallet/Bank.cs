@@ -1,9 +1,19 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace Wallet;
 
 public class Bank {
   readonly Hashtable rates = new();
+
+  public Bank() {
+  }
+
+  public Bank(IEnumerable<(string from, string to, decimal rate)> rates) {
+    foreach ((string from, string to, decimal rate) in rates) {
+      AddRate(from, to, rate);
+    }
+  }
 
   public Money Reduce(Expression source, string to) {
     return source.Reduce(this, to);
