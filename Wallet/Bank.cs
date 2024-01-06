@@ -5,6 +5,7 @@ namespace Wallet;
 
 public class Bank {
   readonly ImmutableDictionary<Pair, decimal> rates;
+  ImmutableDictionary<Pair, decimal> Rates => rates;
 
   private Bank(ImmutableDictionary<Pair, decimal> rates) {
     this.rates = rates;
@@ -24,6 +25,6 @@ public class Bank {
   }
 
   public decimal Rate(string from, string to) {
-    return from.Equals(to) ? 1m : rates[new Pair(from, to)];
+    return from.Equals(to) ? 1m : Rates[new Pair(from, to)];
   }
 }
