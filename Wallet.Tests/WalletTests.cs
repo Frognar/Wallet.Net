@@ -1,21 +1,21 @@
-using System.Linq.Expressions;
 using Xunit;
 
 namespace Wallet.Tests;
 
 public class WalletTests {
+  readonly Money fiveBucks = Money.Dollar(5);
+  readonly Money tenFrancs = Money.Franc(10);
+  
   [Fact]
   public void TestMultiplication() {
-    Money five = Money.Dollar(5);
-    Assert.Equal(Money.Dollar(10), five.Times(2));
-    Assert.Equal(Money.Dollar(15), five.Times(3));
+    Assert.Equal(Money.Dollar(10), fiveBucks.Times(2));
+    Assert.Equal(Money.Dollar(15), fiveBucks.Times(3));
   }
   
   [Fact]
   public void TestDecimalMultiplication() {
-    Money five = Money.Dollar(5);
-    Assert.Equal(Money.Dollar(10), five.Times(2m));
-    Assert.Equal(Money.Dollar(15), five.Times(3m));
+    Assert.Equal(Money.Dollar(10), fiveBucks.Times(2m));
+    Assert.Equal(Money.Dollar(15), fiveBucks.Times(3m));
   }
 
   [Fact]
@@ -33,8 +33,7 @@ public class WalletTests {
 
   [Fact]
   public void TestSimpleAddition() {
-    Money five = Money.Dollar(5);
-    Expression result = five.Plus(five);
+    Expression result = fiveBucks.Plus(fiveBucks);
     Sum sum = (Sum)result;
     Bank bank = new();
     Money reduced = bank.Reduce(sum, "USD");
@@ -70,8 +69,6 @@ public class WalletTests {
 
   [Fact]
   public void TestMixedAddition() {
-    Expression fiveBucks = Money.Dollar(5);
-    Expression tenFrancs = Money.Franc(10);
     Bank bank = new([("CHF", "USD", 2m)]);
     Expression result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(10), result);
@@ -79,8 +76,6 @@ public class WalletTests {
 
   [Fact]
   public void TestSumPlusMoney() {
-    Expression fiveBucks = Money.Dollar(5);
-    Expression tenFrancs = Money.Franc(10);
     Bank bank = new([("CHF", "USD", 2m)]);
     Expression sum = new Sum(fiveBucks, tenFrancs).Plus(fiveBucks);
     Money result = bank.Reduce(sum, "USD");
@@ -89,8 +84,6 @@ public class WalletTests {
 
   [Fact]
   public void TestSumTimes() {
-    Expression fiveBucks = Money.Dollar(5);
-    Expression tenFrancs = Money.Franc(10);
     Bank bank = new([("CHF", "USD", 2m)]);
     Expression sum = new Sum(fiveBucks, tenFrancs).Times(2.5m);
     Money result = bank.Reduce(sum, "USD");
@@ -99,8 +92,6 @@ public class WalletTests {
 
   [Fact]
   public void TestReduceWithDecimalExchangeRate() {
-    Money fiveBucks = Money.Dollar(5);
-    Money tenFrancs = Money.Franc(10);
     Bank bank = new([("CHF", "USD", 2.5m)]);
     Money result = bank.Reduce(fiveBucks.Plus(tenFrancs), "USD");
     Assert.Equal(Money.Dollar(9), result);
